@@ -4,7 +4,13 @@ import { api } from "../utils/api";
 interface FileUploadState {
   isUploading: boolean;
   uploadProgress: number;
-  uploadFile: (file: File) => Promise<string>;
+  uploadFile: (
+    file: File
+  ) => Promise<{
+    message: string;
+    document_id: string;
+    chunks_processed: number;
+  }>;
   setUploading: (uploading: boolean) => void;
   setProgress: (progress: number) => void;
 }
@@ -20,10 +26,11 @@ export const useFileUploadStore = create<FileUploadState>((set) => ({
       "text/plain",
       "application/msword",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/csv",
     ];
 
     if (!allowedTypes.includes(file.type)) {
-      throw new Error("Please upload a PDF, TXT, or DOC/DOCX file.");
+      throw new Error("Please upload a PDF, TXT, DOC/DOCX, or CSV file.");
     }
 
     // Validate file size (10MB limit)

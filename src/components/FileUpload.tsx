@@ -15,8 +15,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
     if (!file) return;
 
     try {
-      const message = await uploadFile(file);
-      addNotification(message, "success");
+      const result = await uploadFile(file);
+      addNotification(result.message, "success");
     } catch (error) {
       console.error("Upload error:", error);
       addNotification(
@@ -82,7 +82,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
           </div>
           <input
             type="file"
-            accept=".pdf,.txt,.doc,.docx"
+            accept=".pdf,.txt,.doc,.docx,.csv"
             onChange={handleFileInput}
             disabled={isUploading}
             className="hidden"
@@ -97,7 +97,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
             {isUploading ? "Uploading..." : "Choose File"}
           </label>
           <p className="text-xs text-gray-400 mt-2">
-            Supported formats: PDF, TXT, DOC, DOCX (max 10MB)
+            Supported formats: PDF, TXT, DOC, DOCX, CSV (max 10MB)
           </p>
         </div>
       </div>
