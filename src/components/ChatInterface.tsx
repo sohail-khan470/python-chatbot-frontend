@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import { useChatStore } from "../stores/chatStore";
 
 interface ChatInterfaceProps {
@@ -52,9 +53,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ className }) => {
                   : "bg-gray-200 text-gray-800"
               }`}
             >
-              <p className="whitespace-pre-wrap word-break-all">
-                {message.text}
-              </p>
+              <div className="prose prose-sm max-w-none">
+                <ReactMarkdown>{message.text}</ReactMarkdown>
+              </div>
               {message.sources && message.sources.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
                   <p>Sources: {message.sources.join(", ")}</p>

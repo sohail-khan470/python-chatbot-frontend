@@ -8,7 +8,7 @@ interface FileUploadProps {
 
 const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
   const [dragActive, setDragActive] = useState(false);
-  const { isUploading, uploadProgress, uploadFile } = useFileUploadStore();
+  const { isUploading, uploadFile } = useFileUploadStore();
   const { addNotification } = useNotificationStore();
 
   const handleFileUpload = async (file: File) => {
